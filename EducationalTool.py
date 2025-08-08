@@ -1,12 +1,13 @@
-# TODOS LOS DATOS DE ENTRADA ESTAN EN CENTIMETROS
-base = float(input("Ingresa la base de la viga (cm): "))
-recu = float(input("Ingresa el recubrimiento (cm): "))
-dia_estribo = float(input("Ingresa el diametro del estribo (cm): "))
-# MATRIZ DE DATOS, TABLA DE ACEROS
-acero = float(input("Ingresa el acero que estas buscando (cm²): "))
-limitante_d = int(input("Ingresa hasta que diametro de varilla quieres tomar en cuenta (mm): "))
-tolerancia_error = float(input("Ingrese la tolerancia de su busqueda (ej. 0.05 para 0.05 cm²): "))
-# TABLA DE ACEROS
+# ALL INPUT DATA IS IN CENTIMETERS
+base = float(input("Enter the beam's base (cm): "))
+recu = float(input("Enter the concrete cover (cm): "))
+dia_estribo = float(input("Enter the stirrup's diameter (cm): "))
+# DATA MATRIX, STEEL TABLE
+
+acero = float(input("Enter the steel area you are looking for (cm²): "))
+limitante_d = int(input("Enter the maximum bar diameter to consider (mm): "))
+tolerancia_error = float(input("Enter the search tolerance (e.g., 0.05 for 0.05 cm²): "))
+# STEEL TABLE
 TA = [[0,1,2,3,4,5,6,7,8,9,10,11,12],
     [6,0.28,0.57,0.85,1.13,1.41,1.70,1.98,2.26,2.54,2.83,3.11,3.39],
     [8,0.50,1.01,1.51,2.01,2.51,3.02,3.52,4.02,4.52,5.03,5.53,6.03],
@@ -48,9 +49,9 @@ def buscar_acero(acero_obj):
                     if acero_obj == TA[k][j]:
                         espaciamiento = calcular_espaciamiento(TA[0][j], TA[k][0], base, recu, dia_estribo)
                         if (espaciamiento >= 2.5):
-                            print(f"necesitas {TA[0][j]} varillas de {TA[k][0]}  mm de diametro ")
-                            print(f"el espaciamiento es {espaciamiento:.2f} cm")
-                            print(f"la cantidad de acero es {acero_obj} cm²")
+                            print(f"You need {TA[0][j]} bars of {TA[k][0]}  mm in diameter ")
+                            print(f"The spacing is {espaciamiento:.2f} cm")
+                            print(f"The steel area is {acero_obj} cm²")
                             exit()
             
             for m in range(1,i):
@@ -61,10 +62,10 @@ def buscar_acero(acero_obj):
                                 suma = round((TA[m][n] + TA[l][o]),2)
                                 espaciamiento2 = calcular_espaciamiento_combinado(TA[0][n], TA[m][0], TA[0][o], TA[l][0], base, recu, dia_estribo)
                                 if (acero_obj == suma) and (espaciamiento2 >= 2.5):
-                                    print(f"necesitas {TA[0][n]} varillas de {TA[m][0]}  mm de diametro y")
-                                    print(f"{TA[0][o]} varillas de {TA[l][0]}  mm de diametro ")
+                                    print(f"You need {TA[0][n]} bars of {TA[m][0]}  mm in diameter and")
+                                    print(f"{TA[0][o]} bars of {TA[l][0]}  mm in diameter ")
                                     print(f"{TA[m][n]} + {TA[l][o]} = {suma} cm²")
-                                    print(f"el espaciamiento es {espaciamiento2:.2f} cm")
+                                    print(f"The spacing is {espaciamiento2:.2f} cm")
                                     exit()
     return False
 
@@ -80,9 +81,8 @@ if diametro_limitante_existe:
     for i in range(0,i_entero):
         buscar_acero(round(acero_inicial + (i * 0.01), 2))
 else:
-    print("Diametro no valido")
+    print("Invalid diameter")
     exit()
 
-print("No se a encontrado su requerimiento")
-
+print("Your requirement has not been found")
 exit()

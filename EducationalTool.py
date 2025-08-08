@@ -3,7 +3,6 @@ base = float(input("Ingresa la base de la viga (cm): "))
 recu = float(input("Ingresa el recubrimiento (cm): "))
 dia_estribo = float(input("Ingresa el diametro del estribo (cm): "))
 # MATRIZ DE DATOS, TABLA DE ACEROS
-
 acero = float(input("Ingresa el acero que estas buscando (cm²): "))
 limitante_d = int(input("Ingresa hasta que diametro de varilla quieres tomar en cuenta (mm): "))
 tolerancia_error = float(input("Ingrese la tolerancia de su busqueda (ej. 0.05 para 0.05 cm²): "))
@@ -85,4 +84,5 @@ else:
     exit()
 
 print("No se a encontrado su requerimiento")
+
 exit()
